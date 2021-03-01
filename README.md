@@ -3,6 +3,8 @@
 ### Project URL
 [https://github.com/alibabacloud-labs/solution-online-leaderboard-redis](https://github.com/alibabacloud-labs/solution-online-leaderboard-redis)
 
+### Architecture Overview
+![image.png](https://intranetproxy.alipay.com/skylark/lark/0/2021/png/32590/1614587375187-45c11995-15e2-42c6-8e4b-651f8e433813.png#align=left&display=inline&height=682&margin=%5Bobject%20Object%5D&name=image.png&originHeight=682&originWidth=1275&size=264455&status=done&style=none&width=1275)
 
 ### Deployment
 #### Terraform
