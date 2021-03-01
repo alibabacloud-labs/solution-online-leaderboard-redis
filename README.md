@@ -77,4 +77,5 @@ mvn clean package assembly:single -DskipTests
 java -classpath target/demo-0.0.1-SNAPSHOT.jar test.GameRankSample
 ```
 Running result:
+
 ![image.png](https://github.com/alibabacloud-labs/solution-online-leaderboard-redis/raw/main/images/step3-1.png)
