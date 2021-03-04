@@ -1,14 +1,14 @@
 provider "alicloud" {
-#   access_key = "${var.access_key}"
-#   secret_key = "${var.secret_key}"
-  region     = "ap-southeast-1"
+  #   access_key = "${var.access_key}"
+  #   secret_key = "${var.secret_key}"
+  region = "ap-southeast-1"
 }
 
 variable "name" {
   default = "auto_provisioning_group"
 }
 
-# Create a new ECS instance for a VPC
+# Security group
 resource "alicloud_security_group" "group" {
   name        = "sg_solution_online_leaderboard"
   description = "foo"
@@ -21,7 +21,7 @@ resource "alicloud_security_group" "group" {
 #   key_state              = "Enabled"
 # }
 
-# Create a new ECS instance for VPC
+# VPC
 resource "alicloud_vpc" "vpc" {
   name       = var.name
   cidr_block = "172.16.0.0/16"
@@ -40,9 +40,7 @@ resource "alicloud_vswitch" "vswitch" {
 # }
 
 resource "alicloud_instance" "instance" {
-  # cn-beijing
-  # availability_zone = "cn-beijing-b"
-  security_groups   = alicloud_security_group.group.*.id
+  security_groups = alicloud_security_group.group.*.id
 
   # series III
   instance_type              = "ecs.n4.large"
@@ -77,20 +75,20 @@ data "alicloud_zones" "default" {
 }
 
 resource "alicloud_kvstore_instance" "example" {
-  db_instance_name      = "tf-test-basic"
-  vswitch_id            = alicloud_vswitch.vswitch.id
-  security_group_id     = alicloud_security_group.group.id
-  instance_type         = "Redis"
-  engine_version        = "4.0"
+  db_instance_name  = "tf-test-basic"
+  vswitch_id        = alicloud_vswitch.vswitch.id
+  security_group_id = alicloud_security_group.group.id
+  instance_type     = "Redis"
+  engine_version    = "4.0"
   config = {
-    appendonly = "yes",
+    appendonly             = "yes",
     lazyfree-lazy-eviction = "yes",
   }
   tags = {
     Created = "TF",
-    For = "Test",
+    For     = "Test",
   }
-  resource_group_id     = "rg-123456"
-  zone_id               = data.alicloud_zones.default.zones[0].id
-  instance_class        = "redis.master.micro.default"
+  resource_group_id = "rg-123456"
+  zone_id           = data.alicloud_zones.default.zones[0].id
+  instance_class    = "redis.master.micro.default"
 }

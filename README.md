@@ -14,6 +14,16 @@ Use terraform to provision ECS and Redis instances that used in this solution ag
 
 For more information about how to use Terraform, please refer to this tutorial: [https://www.youtube.com/watch?v=zDDFQ9C9XP8](https://www.youtube.com/watch?v=zDDFQ9C9XP8)
 
+In the file: https://github.com/alibabacloud-labs/solution-online-leaderboard-redis/blob/main/deployment/terraform/main.tf
+If you do not specify the provider parameters in the environment, please set your Alibaba Cloud access key, secret key here.
+
+```bash
+provider "alicloud" {
+  #   access_key = "${var.access_key}"
+  #   secret_key = "${var.secret_key}"
+  region = "ap-southeast-1"
+}
+```
 
 ### Run Demo
 #### Step 1: Set Redis access password
